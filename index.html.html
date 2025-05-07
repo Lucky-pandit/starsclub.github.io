@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Star Club - Cricket Equipment</title>
+<style>
+  /* Reset and base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f9ff;
+    color: #222;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    min-height: 600px;
+    max-width: 350px;
+    margin: 0 auto;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 600px;
+  }
+
+  header {
+    background: #005baa;
+    color: white;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 1.7px;
+    margin: 0 1.5rem;
+  }
+  nav {
+    margin-top: 0.5rem;
+  }
+  nav a {
+    color: #cde3ff;
+    text-decoration: none;
+    margin: 0 0.7rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover, nav a:focus {
+    color: #ffde59;
+    outline: none;
+  }
+
+  /* Decorative cricket images in header */
+  .header-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.3));
+  }
+  .header-icon-left {
+    position: absolute;
+    left: 15px;
+  }
+  .header-icon-right {
+    position: absolute;
+    right: 15px;
+  }
+
+  main {
+    padding: 1rem 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  .hero {
+    background: #0073e6;
+    border-radius: 10px;
+    color: white;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 115, 230, 0.4);
+    position: relative;
+  }
+  .hero h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero button {
+    background: #ffde59;
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1.3rem;
+    font-weight: 600;
+    color: #004080;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 222, 89, 0.6);
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  .hero button:hover, .hero button:focus {
+    background: #ffcf00;
+    outline: none;
+  }
+
+  /* Background decorative cricket ball image in hero - subtle */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    width: 80px;
+    height: 80px;
+    background: url('https://i.imgur.com/RLF07u7.png') no-repeat center/contain;
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Single column for products vertically stacked */
+  .products {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+  }
+  .product-img {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .product-info {
+    flex-grow: 1;
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: #005baa;
+  }
+  .product-desc {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.4rem;
+  }
+  .product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0073e6;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Add to Cart button */
+  .add-to-cart-btn {
+    background-color: #ffde59;
+    color: #004080;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(255, 222, 89, 0.6);
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  .add-to-cart-btn:hover, .add-to-cart-btn:focus {
+    background-color: #ffcf00;
+    outline: none;
+  }
+
+  footer {
+    background: #004080;
+    color: #cde3ff;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    font-style: italic;
+    user-select: none;
+  }
+
+  /* Toast notification */
+  #toast {
+    visibility: hidden;
+    min-width: 160px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 25px;
+    padding: 0.6rem 1rem;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+  }
+  #toast.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Scrollbar for product area on mobile */
+  main::-webkit-scrollbar {
+    width: 5px;
+  }
+  main::-webkit-scrollbar-thumb {
+    background-color: #0073e6;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 350px) {
+    .hero h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <img src="https://i.imgur.com/3Udm6TU.png" alt="Cricket bat icon" class="header-icon header-icon-left" aria-hidden="true" />
+  <h1>Star Club</h1>
+  <img src="https://i.imgur.com/zwu5FQ8.png" alt="Cricket ball icon" class="header-icon header-icon-right" aria-hidden="true" />
+  <nav>
+    <a href="#products" tabindex="1">Products</a>
+    <a href="#contact" tabindex="2">Contact</a>
+  </nav>
+</header>
+<main>
+  <section class="hero" aria-label="Star Club hero section">
+    <h2>Your Elite Cricket Gear Store</h2>
+    <p>Top-quality bats, balls, and accessories for every player.</p>
+    <button type="button" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" aria-label="Shop Now">Shop Now</button>
+  </section>
+
+  <section id="products" aria-label="Cricket equipment products" class="products">
+    <article class="product-card" tabindex="0" aria-describedby="desc-bat">
+      <img src="https://i.imgur.com/E8WbTtC.png" alt="Cricket Bat" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Premium Willow Bat</h3>
+        <p id="desc-bat" class="product-desc">Handcrafted English willow cricket bat - lightweight & powerful.</p>
+        <div class="product-price">₹7,499</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Premium Willow Bat to cart" data-product="Premium Willow Bat">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-ball">
+      <img src="https://i.imgur.com/q9xwybS.png" alt="Cricket Ball" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Professional Cricket Ball</h3>
+        <p id="desc-ball" class="product-desc">Premium red leather cricket ball - perfect for matches.</p>
+        <div class="product-price">₹299</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Professional Cricket Ball to cart" data-product="Professional Cricket Ball">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-gloves">
+      <img src="https://i.imgur.com/jYlmTYW.png" alt="Cricket Gloves" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Batting Gloves</h3>
+        <p id="desc-gloves" class="product-desc">Comfort-fit, breathable gloves with excellent grip.</p>
+        <div class="product-price">₹1,250</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Batting Gloves to cart" data-product="Batting Gloves">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-pads">
+      <img src="https://i.imgur.com/aXkvl4J.png" alt="Cricket Pads" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Protective Leg Pads</h3>
+        <p id="desc-pads" class="product-desc">Lightweight, adjustable leg pads for optimal protection.</p>
+        <div class="product-price">₹1,800</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Protective Leg Pads to cart" data-product="Protective Leg Pads">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-helmet">
+      <img src="https://i.imgur.com/47dIvtm.png" alt="Cricket Helmet" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Safety Cricket Helmet</h3>
+        <p id="desc-helmet" class="product-desc">Shock-absorbent, ventilated helmet for ultimate safety.</p>
+        <div class="product-price">₹3,499</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Safety Cricket Helmet to cart" data-product="Safety Cricket Helmet">Add to Cart</button>
+      </div>
+    </article>
+
+    <!-- New products added -->
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-thighpad">
+      <img src="https://i.imgur.com/rCRsz8e.png" alt="Cricket Thigh Pad" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Impact Thigh Pad</h3>
+        <p id="desc-thighpad" class="product-desc">High-density foam thigh pad for added protection and comfort.</p>
+        <div class="product-price">₹1,100</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Impact Thigh Pad to cart" data-product="Impact Thigh Pad">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-armguard">
+      <img src="https://i.imgur.com/EqsxZmE.png" alt="Cricket Arm Guard" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Adjustable Arm Guard</h3>
+        <p id="desc-armguard" class="product-desc">Lightweight arm guard with adjustable straps for secure fit.</p>
+        <div class="product-price">₹900</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Adjustable Arm Guard to cart" data-product="Adjustable Arm Guard">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-throatsafe">
+      <img src="https://i.imgur.com/VvmpZ9D.png" alt="Cricket Throat Guard" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Throat Guard</h3>
+        <p id="desc-throatsafe" class="product-desc">Durable throat guard providing extra neck protection.</p>
+        <div class="product-price">₹600</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Throat Guard to cart" data-product="Throat Guard">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-describedby="desc-cricketbag">
+      <img src="https://i.imgur.com/mJu5ct5.png" alt="Cricket Kit Bag" class="product-img" />
+      <div class="product-info">
+        <h3 class="product-name">Cricket Kit Bag</h3>
+        <p id="desc-cricketbag" class="product-desc">Spacious, durable cricket kit bag for easy transport.</p>
+        <div class="product-price">₹2,999</div>
+        <button class="add-to-cart-btn" type="button" aria-label="Add Cricket Kit Bag to cart" data-product="Cricket Kit Bag">Add to Cart</button>
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<footer id="contact" aria-label="Contact information">
+  <p>Made by Lucky</p>
+</footer>
+
+<div id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+<script>
+  const toast = document.getElementById('toast');
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2300);
+  }
+
+  document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const productName = button.getAttribute('data-product');
+      showToast(`Added "${productName}" to cart!`);
+    });
+  });
+</script>
+</body>
+</html>
+</content>
+</create_file>
+
